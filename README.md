@@ -6,41 +6,53 @@
 
     SO THAT I have quick access to their emails and GitHub profiles
 
-Acceptance Criteria
 
-GIVEN a command-line application that accepts user input
+## Description
 
-WHEN I am prompted for my team members and their information
+To be able to use the command prompt to able to create a manager that is able to add team members.
 
-THEN an HTML file is generated that displays a nicely formatted team 
-roster based on user input
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-WHEN I click on an email address in the HTML
 
-THEN my default email program opens and populates the TO field of the email with the address
+## Table of Contents 
 
-WHEN I click on the GitHub username
+- [Installation](#installation)
+- [Usage](#usage)
+- [Credits](#credits)
+- [License](#license)
+- [Tests](#tests)
+- [Questions](#Questions)
 
-THEN that GitHub profile opens in a new tab
+## Installation
 
-WHEN I start the application
+Inquirer and JEST
 
-THEN I am prompted to enter the team manager’s name, employee ID, email address, and office number
+## Usage
 
-WHEN I enter the team manager’s name, employee ID, email address, and office number
+You would use this application inside the terminal and it would use your inputs to create a html file that is based off those inputs.
 
-THEN I am presented with a menu with the option to add an engineer or an intern or to finish building my team
+Here is a video of me using the application: https://drive.google.com/file/d/1gJv3iLvZXoZreWguI-z3Vz6943IchYRT/view
 
-WHEN I select the engineer option
+## Credits
 
-THEN I am prompted to enter the engineer’s name, ID, email, and GitHub username, and I am taken back to the menu
+None
 
-WHEN I select the intern option
+## License
 
-THEN I am prompted to enter the intern’s name, ID, email, and school, and I am taken back to the menu
+This is under the [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) license.
 
-WHEN I decide to finish building my team
+---
 
-THEN I exit the application, and the HTML is generated
+## Tests
+
+Run the tests inside the command line with npm TESTS or the individual test such as Employee.test.js etc.
+
+
+## Questions
+
+If you would like to contact me for any questions or possible freelance work reach out to me to my links:
+- https://github.com/TreyMBach
+- https://www.linkedin.com/in/trey-bach-191183200/
+- treybachyt@gmail.com
 
 ![](images/10-object-oriented-programming-homework-demo.jpg)

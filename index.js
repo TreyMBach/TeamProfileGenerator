@@ -9,6 +9,42 @@ let htmlContent = '';
 let employees = [];
 let projectName = ''
 
+function start(){
+    inquirer.prompt([
+        {
+            type: `input`,
+            message: `What is the project's name?`,
+            name: `projectName`
+        },
+        {
+            type: `input`,
+            message: `What is the Manager's name?`,
+            name: `managerName`
+        },
+        {
+            type: `input`,
+            message: `What is the Manager's ID?`,
+            name: `managerID`
+        },
+        {
+            type: `input`,
+            message: `What is the Manager's email?`,
+            name: `managerEmail`
+        },
+        {
+            type: `input`,
+            message: `What is the Manager's office number?`,
+            name: `officeNumber`
+        },
+    ]).then(function(answer){
+        const teamManager = new Manager.Manager(answer.managerName, parseInt(answer.managerID), answer.managerEmail, parseInt(answer.officeNumber));
+        employees.push(teamManager)
+        projectName = answer.projectName
+        newEmployee();
+    })
+};
+
+
 function newEmployee(){
     inquirer.prompt([
         {
@@ -84,42 +120,53 @@ function newIntern(){
     newEmployee();
 })}
 
+
 function generateHtml() {
     htmlContent = `<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>${projectName}</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Signika+Negative:wght@300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  </head>
-  <body style="background-color: rgb(199, 199, 199); color: rgb(0, 134, 134); font-size: 15; font-family: 'Signika Negative', sans-serif;">
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title>Team Manager</title>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    </head>
+    <body style="font-family: 'Roboto', sans-serif; background-color: white; color: black; font-size: 15; font-weight: bold;">
     <header class = "page-header" style="padding-left: 3px; border-bottom: 1px solid rgb(0, 187, 187);">
         <h1>${projectName}  <small>Team Members</small></h1>
     </header>
+    <header class = "page-header" style="background-color: rgb(214, 28, 78); padding: 100px; font-weight: bolder; margin: 0px 0px 0px 0px;">
+        <h1 style="font-weight: bold; text-align: center; color: white;">My Team</h1>
+    </header>
+
     <main class="container-fluid" style="display:flex; flex-wrap: wrap;">`;
     for (let i = 0; i < employees.length; i++) { 
         htmlContent += `
-        <section class="text-center" style="flex: 1; border: 1px solid rgb(0, 134, 134); padding: 3px;">
+        <section class="card contentContainer text-center" style=" border: 2px solid black; border-radius: 10px; height: 200px; width: 200px; box-shadow: 5px 5px 5px; flex: 1; margin: 10px; background-color:  white; padding: 3px;">
             <h3>${employees[i].name}</h3>
             <p>${employees[i].getPosition()}</p>
             <p>Employee ID: ${employees[i].id}</p>
             <p>Email: <a href = "mailto: ${employees[i].email}">${employees[i].email}</a></p>`;
-        if (employees[i].position === `Manager`) {
+        if (employees[i].getPosition() === `Manager`) {
          htmlContent += `
          <p>Office Number: ${employees[i].officeNumber}</p>`;
-        } else if (employees[i].position === `Engineer`) {
+        } else if (employees[i].getPosition() === `Engineer`) {
             htmlContent += `
             <p>GitHub Profile: <a href = "https://github.com/${employees[i].github}" target = "_blank">${employees[i].github}</a></p>`;
-        } else if (employees[i].position === `Intern`) {
+        } else if (employees[i].getPosition() === `Intern`) {
             htmlContent += `
             <p>School: ${employees[i].school}</p>`;
         }
         htmlContent += `
+        <style>
+            .contentContainer:hover{
+                transition: 200ms;
+                opacity: 50%;
+            }
+        </style>
         </section>`;
 }
 htmlContent += `
@@ -135,41 +182,5 @@ function teamFinished(){
        console.log(`File created under ${projectName}Team.html`);
    });
 }
-
-
-function start(){
-    inquirer.prompt([
-        {
-            type: `input`,
-            message: `What is the project's name?`,
-            name: `projectName`
-        },
-        {
-            type: `input`,
-            message: `What is the Manager's name?`,
-            name: `managerName`
-        },
-        {
-            type: `input`,
-            message: `What is the Manager's ID?`,
-            name: `managerID`
-        },
-        {
-            type: `input`,
-            message: `What is the Manager's email?`,
-            name: `managerEmail`
-        },
-        {
-            type: `input`,
-            message: `What is the Manager's office number?`,
-            name: `officeNumber`
-        },
-    ]).then(function(answer){
-        const teamManager = new Manager.Manager(answer.managerName, parseInt(answer.managerID), answer.managerEmail, parseInt(answer.officeNumber));
-        employees.push(teamManager)
-        projectName = answer.projectName
-        newEmployee();
-    })
-};
 
 start();
