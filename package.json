@@ -1,11 +1,4 @@
 {
-  "dependencies": {
-    "inquirer": "^8.2.4",
-    "node-fetch": "^2.6.1"
-  },
-  "devDependencies": {
-    "jest": "^29.0.1"
-  },
   "name": "teamprofilegenerator",
   "description": "AS A manager",
   "version": "1.0.0",
@@ -15,7 +8,7 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -27,5 +20,12 @@
   "bugs": {
     "url": "https://github.com/TreyMBach/TeamProfileGenerator/issues"
   },
-  "homepage": "https://github.com/TreyMBach/TeamProfileGenerator#readme"
+  "homepage": "https://github.com/TreyMBach/TeamProfileGenerator#readme",
+  "dependencies": {
+    "inquirer": "^8.2.4",
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "jest": "^29.0.1"
+  }
 }

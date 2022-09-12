@@ -38,7 +38,7 @@ function newEngineer(){
         {
             type: 'input',
             message: 'What is the id of the engineer?',
-            name: 'enginnnerID'
+            name: 'engineerID'
         },
         {
             type: 'input',
@@ -51,7 +51,7 @@ function newEngineer(){
             name: 'engineerGithub'
         },
     ]).then(function(answer){
-        let newEngineer = new Engineer.Engineer(answer.engineerName, answer.engineerID, answer.engineerEmail, `Engineer`, answer.engineerGithub)
+        let newEngineer = new Engineer.Engineer(answer.engineerName, parseInt(answer.engineerID), answer.engineerEmail, answer.engineerGithub)
         employees.push(newEngineer);
         newEmployee();
     })
@@ -79,14 +79,54 @@ function newIntern(){
             name: `internSchool`
         },
     ]).then(function(answer){
-    let newIntern = new Intern.Intern(answer.internName, answer.internId, answer.internEmail, `Intern`, answer.internSchool);
+    let newIntern = new Intern.Intern(answer.internName, parseInt(answer.internID), answer.internEmail, answer.internSchool);
     employees.push(newIntern);
     newEmployee();
 })}
 
 function generateHtml() {
-    htmlContent = ``
+    htmlContent = `<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>${projectName}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Signika+Negative:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  </head>
+  <body style="background-color: rgb(199, 199, 199); color: rgb(0, 134, 134); font-size: 15; font-family: 'Signika Negative', sans-serif;">
+    <header class = "page-header" style="padding-left: 3px; border-bottom: 1px solid rgb(0, 187, 187);">
+        <h1>${projectName}  <small>Team Members</small></h1>
+    </header>
+    <main class="container-fluid" style="display:flex; flex-wrap: wrap;">`;
+    for (let i = 0; i < employees.length; i++) { 
+        htmlContent += `
+        <section class="text-center" style="flex: 1; border: 1px solid rgb(0, 134, 134); padding: 3px;">
+            <h3>${employees[i].name}</h3>
+            <p>${employees[i].getPosition()}</p>
+            <p>Employee ID: ${employees[i].id}</p>
+            <p>Email: <a href = "mailto: ${employees[i].email}">${employees[i].email}</a></p>`;
+        if (employees[i].position === `Manager`) {
+         htmlContent += `
+         <p>Office Number: ${employees[i].officeNumber}</p>`;
+        } else if (employees[i].position === `Engineer`) {
+            htmlContent += `
+            <p>GitHub Profile: <a href = "https://github.com/${employees[i].github}" target = "_blank">${employees[i].github}</a></p>`;
+        } else if (employees[i].position === `Intern`) {
+            htmlContent += `
+            <p>School: ${employees[i].school}</p>`;
+        }
+        htmlContent += `
+        </section>`;
 }
+htmlContent += `
+</main>
+    </body>
+</html>`;
+};
 function teamFinished(){
     generateHtml()
     fs.writeFile(`${projectName} Team.html`, htmlContent,
@@ -111,6 +151,11 @@ function start(){
         },
         {
             type: `input`,
+            message: `What is the Manager's ID?`,
+            name: `managerID`
+        },
+        {
+            type: `input`,
             message: `What is the Manager's email?`,
             name: `managerEmail`
         },
@@ -120,7 +165,7 @@ function start(){
             name: `officeNumber`
         },
     ]).then(function(answer){
-        let teamManager = new Manager.Manager(answer.managerName, answer.managerID, answer.managerEmail, 'Manager', answer.officeNumber);
+        const teamManager = new Manager.Manager(answer.managerName, parseInt(answer.managerID), answer.managerEmail, parseInt(answer.officeNumber));
         employees.push(teamManager)
         projectName = answer.projectName
         newEmployee();

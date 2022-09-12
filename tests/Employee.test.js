@@ -20,15 +20,17 @@ describe('Employee class', () => {
         it("should give an error if there is no input.", () => {
 
             const cb = () => new Employee();
-      
-            expect(cb).toThrow();
+
+            const err = new Error("Expected parameter 'name' to be a non-empty string")
+
+            expect(cb).toThrowError(err);
 
         });
         it("should give an error if not provided an id", () => {
 
             const cb = () => new Employee("trey", "trey@gmail.com");
 
-            const err = new Error("Expected parameter 'id' to be a number");
+            const err = new Error("Expected parameter 'id' to be a non-negative number");
       
             expect(cb).toThrowError(err);
 
@@ -48,7 +50,7 @@ describe('Employee class', () => {
 
             const cb = () => new Employee("trey", "1", "trey@gmail.com");
 
-            const err = new Error("Expected parameter 'id' to be a number");
+            const err = new Error("Expected parameter 'id' to be a non-negative number");
       
             expect(cb).toThrowError(err);
 
@@ -58,7 +60,7 @@ describe('Employee class', () => {
 
             const cb = () => new Employee("trey", -1, "trey@gmail.com");
 
-            const err = new Error("Expected parameter 'id' to be a number");
+            const err = new Error("Expected parameter 'id' to be a non-negative number");
       
             expect(cb).toThrowError(err);
 
@@ -67,7 +69,7 @@ describe('Employee class', () => {
 
             const cb = () => new Employee("trey", 1, 3);
 
-            const err = new Error("Expected parameter 'email' to contain letters in a string.");
+            const err = new Error("Expected parameter 'email' to be a non-empty string");
       
             expect(cb).toThrowError(err);
 
@@ -76,7 +78,7 @@ describe('Employee class', () => {
 
             const cb = () => new Employee("trey", 1);
 
-            const err = new Error("Expected parameter 'email' to contain letters in a string.");
+            const err = new Error("Expected parameter 'email' to be a non-empty string");
       
             expect(cb).toThrowError(err);
 
@@ -122,7 +124,7 @@ describe('Employee class', () => {
 
         it("Returns employees position", () => {
 
-            const employee = new Employee("trey", 1, "trey@gmail.com")
+            const employee = new Employee("trey", 1, "trey@gmail.com", "Employee")
 
             expect(employee.position).toBe("Employee")
 

@@ -1,34 +1,33 @@
-const Employee = require('../lib/employee')
-const Engineer = require('../lib/engineer')
+const { Intern } = require("../lib/intern")
 
-describe("Engineer class", () => {
+describe("Intern class", () => {
 
     describe("Initialization", () => {
 
-        it("Creates an object for the name, employee id and employee email with the github based off the employee class.", () => {
+        it("Creates an object for the name, intern id, intern email and school based off the intern class.", () => {
 
-            const engineer = new Engineer("Trey", 1, "trey@gmail.com", "github.com/trey")
+            const intern = new Intern("Trey", 1, "trey@gmail.com", "UofA")
 
-            expect(engineer.name).toEqual("Trey");
+            expect(intern.name).toEqual("Trey");
 
-            expect(engineer.id).toEqual(1);
+            expect(intern.id).toEqual(1);
 
-            expect(engineer.email).toEqual("trey@gmail.com")
+            expect(intern.email).toEqual("trey@gmail.com")
 
-            expect(engineer.github).toEqual("github.com/trey")
+            expect(intern.school).toEqual("UofA")
 
         });
         //Error Catches
         it("should give an error if there is no input.", () => {
 
-            const cb = () => new Engineer();
+            const cb = () => new Intern();
       
             expect(cb).toThrow();
 
         });
         it("should give an error if not provided an id", () => {
 
-            const cb = () => new Engineer("Trey", "trey@gmail.com", "github.com/trey");
+            const cb = () => new Intern("Trey", "trey@gmail.com", "UofA");
 
             const err = new Error("Expected parameter 'id' to be a non-negative number");
       
@@ -38,7 +37,7 @@ describe("Engineer class", () => {
       
         it("should give an error if 'name' is not provided a string", () => {
 
-            const cb = () => new Engineer(3, 2, "trey@gmail.com", "github.com/trey");
+            const cb = () => new Intern(3, 2, "trey@gmail.com", "UofA");
 
             const err = new Error("Expected parameter 'name' to be a non-empty string");
       
@@ -48,7 +47,7 @@ describe("Engineer class", () => {
       
         it("should give an error if 'id' is not a number", () => {
 
-            const cb = () => new Engineer("Trey", "1", "trey@gmail.com", "github.com/trey");
+            const cb = () => new Intern("Trey", "1", "trey@gmail.com", "UofA");
 
             const err = new Error("Expected parameter 'id' to be a non-negative number");
       
@@ -58,7 +57,7 @@ describe("Engineer class", () => {
       
         it("should give an error if 'id' is less than 0 or a negative number", () => {
 
-            const cb = () => new Engineer("Trey", -1, "trey@gmail.com", "github.com/trey");
+            const cb = () => new Intern("Trey", -1, "trey@gmail.com", "UofA");
 
             const err = new Error("Expected parameter 'id' to be a non-negative number");
 
@@ -67,7 +66,7 @@ describe("Engineer class", () => {
         });
         it("should give an error if 'email' is not provided a string", () => {
 
-            const cb = () => new Engineer("Trey", 1, 3, "github.com/trey");
+            const cb = () => new Intern("Trey", 1, 3, "UofA");
 
             const err = new Error("Expected parameter 'email' to be a non-empty string");
 
@@ -76,70 +75,70 @@ describe("Engineer class", () => {
         });
         it("should give an error if 'github' is not provided a string", () => {
 
-            const cb = () => new Engineer("Trey", 1, "trey@gmail.com", 2);
+            const cb = () => new Intern("Trey", 1, "trey@gmail.com", 2);
 
-            const err = new Error("Expected parameter 'github' to be a non-empty string");
+            const err = new Error("Expected parameter 'school' to be a non-empty string");
 
             expect(cb).toThrowError(err);
 
         });
         it("should throw an error if 'github' is not provided in the input.", () => {
 
-            const cb = () => new Engineer("Trey", 1, "trey@gmail.com");
+            const cb = () => new Intern("Trey", 1, "trey@gmail.com");
 
-            const err = new Error("Expected parameter 'github' to be a non-empty string");
+            const err = new Error("Expected parameter 'school' to be a non-empty string");
 
             expect(cb).toThrowError(err);
         
         });
     })
 
-    describe('getName method', () => {
-        it("Returns the employee name as a string", () => {
+    describe('internName method', () => {
+        it("Returns the intern name as a string", () => {
 
-            const engineer = new Engineer("Trey", 1, "trey@gmail.com", "github.com/trey")
+            const intern = new Intern("Trey", 1, "trey@gmail.com", "UofA")
 
-            expect(engineer.getName()).toBe("Trey")
-
-        })
-    })
-
-    describe('getId method', () => {
-        it("Returns the employee ID as an int", () => {
-
-            const engineer = new Engineer("Trey", 1, "trey@gmail.com", "github.com/trey")
-
-            expect(engineer.getId()).toBe(1)
+            expect(intern.internName()).toBe("Trey")
 
         })
     })
 
-    describe('getEmail method', () => {
-        it("Returns the employee email as a string", () => {
+    describe('internID method', () => {
+        it("Returns the intern ID as an int", () => {
 
-            const engineer = new Engineer("Trey", 1, "trey@gmail.com", "github.com/trey")
+            const intern = new Intern("Trey", 1, "trey@gmail.com", "UofA")
 
-            expect(engineer.getEmail()).toBe("trey@gmail.com")
-
-        })
-    })
-
-    describe('getGithub method', () => {
-        it("Returns the employees github URL", () => {
-
-            const engineer = new Engineer("Trey", 1, "trey@gmail.com", "github.com/trey")
-
-            expect(engineer.getGithub()).toBe("github.com/trey")
+            expect(intern.internID()).toBe(1)
 
         })
     })
 
-    describe('getRole method', () => {
-        it("Returns the employees role", () => {
+    describe('internEmail method', () => {
+        it("Returns the intern email as a string", () => {
 
-            const engineer = new Engineer("Trey", 1, "trey@gmail.com", "github.com/trey")
+            const intern = new Intern("Trey", 1, "trey@gmail.com", "UofA")
 
-            expect(engineer.getRole()).toBe("Engineer")
+            expect(intern.internEmail()).toBe("trey@gmail.com")
+
+        })
+    })
+
+    describe('internSchool method', () => {
+        it("Returns the interns School.", () => {
+
+            const intern = new Intern("Trey", 1, "trey@gmail.com", "UofA")
+
+            expect(intern.internSchool()).toBe("UofA")
+
+        })
+    })
+
+    describe('getPosition method', () => {
+        it("Returns the interns role", () => {
+
+            const intern = new Intern("Trey", 1, "trey@gmail.com", "UofA")
+
+            expect(intern.getPosition()).toBe("Intern")
 
         })
     })

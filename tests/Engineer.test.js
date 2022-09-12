@@ -1,5 +1,4 @@
-const Employee = require('../lib/employee')
-const Engineer = require('../lib/engineer')
+const { Engineer } = require("../lib/engineer");
 
 describe("Engineer class", () => {
 
@@ -23,7 +22,7 @@ describe("Engineer class", () => {
 
             const cb = () => new Engineer();
       
-            expect(cb).toThrow();
+            expect(cb).toThrowError();
 
         });
         it("should give an error if not provided an id", () => {
@@ -76,7 +75,7 @@ describe("Engineer class", () => {
         });
         it("should give an error if 'github' is not provided a string", () => {
 
-            const cb = () => new Engineer("Trey", 1, "trey@gmail.com", 2);
+            const cb = () => new Engineer("Trey", 1, "trey@gmail.com", "");
 
             const err = new Error("Expected parameter 'github' to be a non-empty string");
 
@@ -99,7 +98,7 @@ describe("Engineer class", () => {
 
             const engineer = new Engineer("Trey", 1, "trey@gmail.com", "github.com/trey")
 
-            expect(engineer.getName()).toBe("Trey")
+            expect(engineer.engineerName()).toBe("Trey")
 
         })
     })
@@ -109,7 +108,7 @@ describe("Engineer class", () => {
 
             const engineer = new Engineer("Trey", 1, "trey@gmail.com", "github.com/trey")
 
-            expect(engineer.getId()).toBe(1)
+            expect(engineer.engineerID()).toBe(1)
 
         })
     })
@@ -119,7 +118,7 @@ describe("Engineer class", () => {
 
             const engineer = new Engineer("Trey", 1, "trey@gmail.com", "github.com/trey")
 
-            expect(engineer.getEmail()).toBe("trey@gmail.com")
+            expect(engineer.engineerEmail()).toBe("trey@gmail.com")
 
         })
     })
@@ -129,7 +128,7 @@ describe("Engineer class", () => {
 
             const engineer = new Engineer("Trey", 1, "trey@gmail.com", "github.com/trey")
 
-            expect(engineer.getGithub()).toBe("github.com/trey")
+            expect(engineer.engineerGithub()).toBe("github.com/trey")
 
         })
     })
@@ -139,7 +138,7 @@ describe("Engineer class", () => {
 
             const engineer = new Engineer("Trey", 1, "trey@gmail.com", "github.com/trey")
 
-            expect(engineer.getRole()).toBe("Engineer")
+            expect(engineer.getPosition()).toBe("Engineer")
 
         })
     })
