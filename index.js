@@ -1,4 +1,4 @@
-
+// All the imports for the different library 
 const fs = require(`fs`);
 const inquirer = require('inquirer');
 const Manager = require(`./lib/manager.js`);
