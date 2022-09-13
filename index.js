@@ -5,10 +5,14 @@ const Manager = require(`./lib/manager.js`);
 const Engineer = require(`./lib/engineer.js`);
 const Intern = require(`./lib/intern.js`);
 
+
+// Intitialize the html content to be able to be filled with future inputs.
 let htmlContent = '';
 let employees = [];
 let projectName = ''
 
+
+// Starts the inquirer prompt for user input.
 function start(){
     inquirer.prompt([
         {
@@ -36,6 +40,7 @@ function start(){
             message: `What is the Manager's office number?`,
             name: `officeNumber`
         },
+        // Then uses the answer here to make a new manager based off the class of Manager to generate. Then starts the new Employee() function.
     ]).then(function(answer){
         const teamManager = new Manager.Manager(answer.managerName, parseInt(answer.managerID), answer.managerEmail, parseInt(answer.officeNumber));
         employees.push(teamManager)
@@ -44,7 +49,8 @@ function start(){
     })
 };
 
-
+// This newEmployee() function starts off based on whether you are adding an engineer, intern, or no employee.
+// Based off the input they will ask for name, email, position id, github for the engineer or school for the intern. Then reset the loop to add as many employees you want.
 function newEmployee(){
     inquirer.prompt([
         {
@@ -58,12 +64,12 @@ function newEmployee(){
         } else if (answer.employeeHire === `Intern`){
             newIntern();
         } else {
-            teamFinished();
+            teamFull();
         }
     })
 }
 
-
+// Based off the 1st input for newEmployee(), newEngineer() asking for the name, id, email, and github then creates inside the future html file.
 function newEngineer(){
     inquirer.prompt([
         {
@@ -93,6 +99,7 @@ function newEngineer(){
     })
 }
 
+// Based off the 1st input for newEmployee(), newIntern() asking for the name, id, email, and school then creates inside the future html file.
 function newIntern(){
     inquirer.prompt([
         {
@@ -120,7 +127,7 @@ function newIntern(){
     newEmployee();
 })}
 
-
+// This function generates the HTML based off the input.
 function generateHtml() {
     htmlContent = `<!DOCTYPE html>
     <html lang="en">
@@ -174,7 +181,8 @@ htmlContent += `
     </body>
 </html>`;
 };
-function teamFinished(){
+// When the team is full or doesn't need more employees it will write it to the HTML file.
+function teamFull(){
     generateHtml()
     fs.writeFile(`${projectName} Team.html`, htmlContent,
     function(err){
